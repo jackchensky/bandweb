@@ -54,9 +54,9 @@ article {
 	line-height: 1.8em;
 }
 article img {
-	border-width: .1em;
+	border-width: 0;
 	border-style: solid;
-	outline-width: .1em;
+	outline-width: 0;
 	outline-style: solid;
 }
 #home header {
@@ -74,3 +74,45 @@ article img {
 #contact header {
 	background-image: url(../images/drummer.gif);
 }
+
+/*幻灯片效果*/
+#slideshow {
+	width:150px;
+	height: 150px;
+	position: relative;
+	overflow: hidden;
+}
+#preview {
+	position: absolute;
+	border-width: 0;
+	outline-width: 0;
+}
+#frame {
+	position:absolute;
+	top: 0;
+	left: 0;
+	z-index: 99;
+}
+
+/*photos web main*/
+#imagegallery li {
+	display: inline;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
