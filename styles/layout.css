@@ -99,11 +99,21 @@ article img {
 	display: inline;
 }
 
+/*Live web main*/
+td {
+	padding: .5em 3em;
+}
 
-
-
-
-
+/*live web main*/
+dl {
+	overflow: hidden;
+}
+dt {
+	float: left;
+}
+dd {
+	float: left;
+}
 
 
 

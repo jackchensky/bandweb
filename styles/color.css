@@ -64,4 +64,24 @@ header nav a.here:active {
 	color: #eef;
 	background-color: #799;
 }
+/*Live web main*/
+th {
+	color:#edc;
+	background-color: #455;
+}
+tr td {
+	color: #223;
+	background-color: #eb6;
+}
+
+/*live web main*/
+tr.odd td {
+	color: #223;
+	background-color: #ec8;
+}
+tr.highlight td {
+	color: #223;
+	background-color: #cba;
+}
+
 
