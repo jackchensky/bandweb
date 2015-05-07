@@ -115,8 +115,13 @@ dd {
 	float: left;
 }
 
-
-
+/*contact web main*/
+label {
+	display: block;
+}
+fieldset {
+	border: 0;
+}
 
 
 
