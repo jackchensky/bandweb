@@ -336,13 +336,13 @@ function validateForm(whichform) {
     var element = whichform.elements[i];
     if (element.className.indexOf("required") != -1) {
       if (!isFilled(element)) {
-        alert("Please fill in the "+element.name+" field.");
+        alert("请输入您的"+element.name+".");
         return false;
       }
     }
     if (element.className.indexOf("email") != -1) {
       if (!isEmail(element)) {
-        alert("The "+element.name+" field must be a valid email address.");
+        alert("请输入您的"+element.name+".");
         return false;
       }
     }
