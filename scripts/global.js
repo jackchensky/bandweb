@@ -75,18 +75,15 @@ function moveElement(elementID, final_x, final_y, interval){
 		var dist = Math.ceil((final_x - xpos)/10);
 		xpos = xpos + dist;
 	}
-	if (xpos >
-final_x) {
+	if (xpos > final_x) {
 		var dist = Math.ceil((xpos - final_x)/10);
 		xpos = xpos - dist;
 	}
-	if (ypos
-< final_y) {
+	if (ypos < final_y) {
 		var dist = Math.ceil((final_y - ypos)/10);
 		ypos = ypos + dist;
 	}
-	if (ypos >
-	final_y) {
+	if (ypos > final_y) {
 		var dist = Math.ceil((ypos - final_y)/10);
 		ypos = ypos - dist;
 	}
@@ -366,17 +363,112 @@ function isEmail(field) {
   }
 }
 
+
+
+function getHTTPObject() {
+	if (typeof XMLHttpRequest == "undefined")
+		XMLHttpRequest = function() {
+			try { return new ActiveXObject("Msxml2.XMLHTTP.6.0"); }
+				catch (e) {}
+			try { return new ActiveXObject("Msxml2.XMLHTTP.3.0"); }
+				catch (e) {}
+			try { return new ActiveXObject("Msxml2.XMLHTTP"); }
+				catch (e) {}
+			return false;
+		}
+		return new XMLHttpRequest();
+}
+
+function displayAjaxLoading(element) {
+	while (element.hasChildNodes()) {
+		element.removeChild(element.lastChild);
+	}
+	var content = document.createElement("img");
+	content.setAttribute("src","images/loading.gif");
+	content.setAttribute("alt","Loading...");
+	element.appendChild(content);
+}
+
+function submitFormWithAjax(whichform, thetarget) {
+	var request = getHTTPObject();
+	if (!request) { return false;}
+	displayAjaxLoading(thetarget);
+	var dataParts = [];
+	var element;
+	for (var i=0; i<whichform.elements.length; i++) {
+		element = whichform.element[i];
+		dataParts[i] = element.name + '=' +encodeURIComponent(element.value);
+	}
+	var data = dataParts.join('&');
+	request.open('POST',whichform.getAttribute("action"), true);
+	request.setRequesHeader("Content-type", "application/x-www-form-urlencoded");
+	request.onreadystatechange = function () {
+		if (request.redyState == 4) {
+			if(request.status == 200 || request.status == 0) {
+				var matches = request.responseText.match(/<article>([\s\S]+)<\/article>/);
+				if (matches.length > 0) {
+					thetarget.innerHTML = matches[1];
+				} else {
+					thetarget.innerHTML = '<p>Oops, there was an error.Sorry.</p>';
+				}
+			}else {
+				thetarget.innerHTML = '<p>' + request.statusText + '</p>';
+			}
+		}
+	};
+	request.send(data);
+	return true;
+};
+
+
+
+
 function prepareForms() {
   for (var i=0; i<document.forms.length; i++) {
     var thisform = document.forms[i];
     resetFields(thisform);
     thisform.onsubmit = function() {
-      return validateForm(this);
+      if (!validateForm(this)) return false;
+      var article = document.getElementsByTagName('article')[0];
+      if (submitFormWithAjax(this, article)) return false;
+      return true;
     }
 	}
 }
 addLoadEvent(focusLabels);
 addLoadEvent(prepareForms);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
